@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: #FFF8EC;
+  color: #35483B;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+}
+
+/* ── Tema oscuro diseñado a mano (no inversión automática) ── */
+.dark {
+  color-scheme: dark;
+  background: #22302A;
+  color: #E7EFE3;
+}
+.dark body { background: #22302A; color: #E7EFE3; }
+.dark .surface { background: #2B3B33 !important; color: #E7EFE3 !important; }
+.dark .surface-2 { background: #34473D !important; }
+.dark .text-main { color: #E7EFE3 !important; }
+.dark .text-sub { color: #A9BCA6 !important; }
+.dark .border-soft { border-color: #3C5145 !important; }
+
+.surface { background: #FFFEFA; }
+.surface-2 { background: #F4F8EF; }
+.border-soft { border-color: #E4EBDD; }
+
+/* Foco visible accesible */
+*:focus-visible {
+  outline: 3px solid #8BD8D0;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Scrollbar discreto */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #CFE0C8; border-radius: 8px; border: 2px solid transparent; background-clip: content-box; }
+.dark ::-webkit-scrollbar-thumb { background: #45604F; border: 2px solid transparent; background-clip: content-box; }
+
+/* Botones suaves con respuesta táctil */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-pill font-bold transition-all duration-200 select-none;
+  min-height: 44px;
+  padding: 0 1.25rem;
+}
+.btn:active { transform: scale(0.96); }
+.btn-primary { @apply btn bg-forest text-ivory shadow-soft hover:bg-[#446a4b]; }
+.btn-secondary { @apply btn bg-mint text-ink hover:bg-[#c7e6c6]; }
+.btn-ghost { @apply btn bg-transparent text-sub hover:bg-mint/60 hover:text-ink; }
+.btn-small { @apply btn text-sm min-h-[36px] px-3; }
+
+.card {
+  @apply surface border border-soft rounded-card shadow-soft;
+}
+
+/* Animaciones sutiles */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.floaty { animation: floaty 6s ease-in-out infinite; }
+
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(340deg); opacity: 0; }
+}
+.petal { animation: petal-fall linear forwards; }
+
+.reduce-motion .floaty,
+.reduce-motion .petal {
+  animation: none !important;
+}
+.reduce-motion * {
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floaty, .petal { animation: none !important; }
+}
+
+/* Evitar selección de texto en la escena */
+canvas { touch-action: none; user-select: none; }
+
+input, textarea, select {
+  font-family: inherit;
+}
